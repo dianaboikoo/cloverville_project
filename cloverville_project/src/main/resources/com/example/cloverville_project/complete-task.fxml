@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.cloverville_project.CompleteTaskController"
+      spacing="12">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Complete Communal Task" style="-fx-font-size: 18;"/>
+
+    <Label text="Resident:"/>
+    <ComboBox fx:id="residentCombo"/>
+
+    <Label text="Task:"/>
+    <ComboBox fx:id="taskCombo"/>
+
+    <Button text="Complete Task" onAction="#handleComplete"/>
+
+    <Label text="Task Log:" style="-fx-font-size: 16; padding-top: 10;"/>
+
+    <ListView fx:id="logList" prefHeight="200"/>
+
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

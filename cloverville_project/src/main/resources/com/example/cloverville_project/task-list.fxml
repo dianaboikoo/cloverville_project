@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.cloverville_project.TaskListController">
+
+    <left>
+        <ListView fx:id="taskListView" prefWidth="220"/>
+    </left>
+
+    <right>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Task Name:"/>
+            <TextField fx:id="nameField"/>
+
+            <Label text="Description:"/>
+            <TextArea fx:id="descriptionField" prefRowCount="3"/>
+
+            <Label text="Personal Points:"/>
+            <TextField fx:id="personalPointsField"/>
+
+            <HBox spacing="10">
+                <Button text="Add" onAction="#handleAdd"/>
+                <Button text="Delete" onAction="#handleDelete"/>
+            </HBox>
+
+            <Button text="Edit Selected" onAction="#handleEdit"/>
+            <Button text="Back" onAction="#handleBack"/>
+        </VBox>
+    </right>
+
+</BorderPane>

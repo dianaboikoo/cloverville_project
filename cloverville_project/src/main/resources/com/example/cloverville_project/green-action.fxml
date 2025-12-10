@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.cloverville_project.GreenActionsController"
+      alignment="CENTER"
+      spacing="15">
+
+    <padding>
+        <Insets top="25" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Green Actions"
+           style="-fx-font-size: 22; -fx-font-weight: bold;" />
+
+    <Label text="Action Name:"/>
+    <TextField fx:id="nameField"/>
+
+    <Label text="Green Points:"/>
+    <TextField fx:id="pointsField"/>
+
+    <Label text="Assign to Resident:"/>
+    <ComboBox fx:id="residentCombo"/>
+
+    <Button text="Add Green Action" onAction="#handleAdd"/>
+
+    <Separator/>
+
+    <Label text="Actions Assigned:"/>
+    <ListView fx:id="actionList" prefHeight="200"/>
+
+    <Button text="Back to Menu" onAction="#handleBack"/>
+
+</VBox>

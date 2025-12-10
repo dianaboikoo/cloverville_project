@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.cloverville_project.TaskEditController"
+      spacing="10">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Edit Communal Task"/>
+
+    <Label text="Name:"/>
+    <TextField fx:id="nameField"/>
+
+    <Label text="Description:"/>
+    <TextArea fx:id="descriptionField" prefRowCount="3"/>
+
+    <Label text="Personal Points:"/>
+    <TextField fx:id="personalPointsField"/>
+
+    <HBox spacing="10">
+        <Button text="Save" onAction="#handleSave"/>
+        <Button text="Back" onAction="#handleBack"/>
+    </HBox>
+
+</VBox>
