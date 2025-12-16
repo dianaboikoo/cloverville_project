@@ -16,6 +16,10 @@ public class GreenActionList {
     public void removeAction(GreenAction action) {
         actions.remove(action);
     }
+    public void clear() {
+        actions.clear();   // or offers.clear(), tasks.clear(), actions.clear()
+    }
+
 
     public List<GreenAction> getAllActions() {
         return actions;

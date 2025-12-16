@@ -11,26 +11,30 @@ public class ListController {
     @FXML private ListView<Resident> listView;
     @FXML private TextField nameField;
 
-    private ClovervilleFacade facade = ClovervilleFacade.getInstance();
-
-    private ObservableList<Resident> residentsObs = FXCollections.observableArrayList();
+    private final ClovervilleFacade facade = ClovervilleFacade.getInstance();
+    private final ObservableList<Resident> residentsObs = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-
-        // Load residents from facade
-        residentsObs.setAll(facade.getAllResidents());
-
         listView.setItems(residentsObs);
+        refreshList(); // refresh every time this screen loads
+    }
+
+    private void refreshList() {
+        residentsObs.setAll(facade.getAllResidents());
+        listView.refresh();
     }
 
     @FXML
     private void handleAdd() {
-        if (nameField.getText().isEmpty()) return;
+        String name = nameField.getText();
+        if (name.isEmpty()) return;
 
-        Resident r = facade.createResident(nameField.getText(), 0, 0);
+        facade.createResident(name, 0, 0);
+        refreshList();
 
-        residentsObs.add(r);
+        // AUTO-SAVE
+        facade.exportAllData("cloverville_export.json");
 
         nameField.clear();
     }
@@ -38,17 +42,23 @@ public class ListController {
     @FXML
     private void handleDelete() {
         Resident selected = listView.getSelectionModel().getSelectedItem();
-        if (selected != null) {
+        if (selected == null) return;
 
-            // Remove from facade list
-            facade.getResidentList().removeResident(selected);
+        facade.deleteResident(selected);
+        refreshList();
 
-            // Remove from UI list
-            residentsObs.remove(selected);
-        }
+        // AUTO-SAVE
+        facade.exportAllData("cloverville_export.json");
     }
 
+    @FXML
+    private void handleEdit() {
+        Resident selected = listView.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
 
+        facade.setSelectedResident(selected);
+        SceneManager.switchTo("edit-view.fxml");
+    }
 
     @FXML
     private void handleGoToCompleteTask() {
@@ -61,14 +71,7 @@ public class ListController {
     }
 
     @FXML
-    private void handleEdit() {
-        Resident selected = listView.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-
-            // Pass resident to EditController
-            EditController.selectedResident = selected;
-
-            SceneManager.switchTo("edit-view.fxml");
-        }
+    private void handleBackToMain() {
+        SceneManager.switchTo("hello-view.fxml");
     }
 }

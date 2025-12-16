@@ -6,13 +6,14 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.cloverville_project.EditController"
-      spacing="10">
+      spacing="12"
+      prefWidth="300">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Edit Resident"/>
+    <Label text="Edit Resident" style="-fx-font-size: 18;"/>
 
     <Label text="Name:"/>
     <TextField fx:id="nameField"/>
@@ -23,9 +24,21 @@
     <Label text="Green Points:"/>
     <TextField fx:id="greenPointsField"/>
 
+    <Button text="Save" onAction="#handleSave"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+    <!-- NEW PARTICIPATION SECTION -->
+    <Label text="Participation:" style="-fx-font-size: 16;"/>
+
+    <!-- Shows number of completed tasks -->
+    <Label fx:id="participationCountLabel" text="Completed Tasks: 0"/>
+
+    <!-- Shows resident’s current boost -->
+    <Label fx:id="currentBoostLabel" text="Boost: 0%"/>
+
     <HBox spacing="10">
-        <Button text="Save" onAction="#handleSave"/>
-        <Button text="Back" onAction="#handleBack"/>
+        <TextField fx:id="boostField" promptText="Boost %"/>
+        <Button text="Apply Boost" onAction="#handleApplyBoost"/>
     </HBox>
 
 </VBox>

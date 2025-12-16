@@ -1,0 +1,43 @@
+{
+  "taskLog": [
+    {
+      "residentName": "Marcus",
+      "taskName": "labubu"
+    }
+  ],
+  "tradeOffers": [],
+  "residents": [
+    {
+      "participationBoostPercent": 0,
+      "personalPoints": 67,
+      "name": "Marcus",
+      "greenPoints": 0
+    },
+    {
+      "participationBoostPercent": 0,
+      "personalPoints": 0,
+      "name": "Diana",
+      "greenPoints": 0
+    },
+    {
+      "participationBoostPercent": 0,
+      "personalPoints": 0,
+      "name": "Maciej",
+      "greenPoints": 0
+    }
+  ],
+  "communityPool": 67,
+  "tasks": [
+    {
+      "personalPoints": 67,
+      "name": "labubu",
+      "description": "labuby"
+    },
+    {
+      "personalPoints": 27,
+      "name": "skibidi",
+      "description": "asdasd"
+    }
+  ],
+  "greenActions": []
+}

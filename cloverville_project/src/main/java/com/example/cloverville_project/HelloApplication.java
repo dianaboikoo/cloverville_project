@@ -11,6 +11,7 @@ public class HelloApplication extends Application
 {
     @Override public void start(Stage stage) throws IOException
     {
+        ClovervilleFacade.getInstance().importAllData("cloverville_export.json");
 
         SceneManager.setStage(stage);
         SceneManager.switchTo("hello-view.fxml");

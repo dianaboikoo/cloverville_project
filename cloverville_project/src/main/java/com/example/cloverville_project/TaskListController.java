@@ -3,9 +3,7 @@ package com.example.cloverville_project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class TaskListController {
 
@@ -14,38 +12,27 @@ public class TaskListController {
     @FXML private TextArea descriptionField;
     @FXML private TextField personalPointsField;
 
-    // Used to pass the selected task to the edit screen
+    private final ClovervilleFacade facade = ClovervilleFacade.getInstance();
+    private final ObservableList<CommunalTask> tasksObs = FXCollections.observableArrayList();
+
     public static CommunalTask selectedTask;
-
-    private ClovervilleFacade facade = ClovervilleFacade.getInstance();
-
-    private ObservableList<CommunalTask> tasksObs = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-
-        // Load tasks from facade
         tasksObs.setAll(facade.getAllTasks());
-
         taskListView.setItems(tasksObs);
     }
 
     @FXML
     private void handleAdd() {
-
         String name = nameField.getText();
         String desc = descriptionField.getText();
-        int points = personalPointsField.getText().isEmpty()
-                ? 0
-                : Integer.parseInt(personalPointsField.getText());
+        int points = Integer.parseInt(personalPointsField.getText());
 
-        if (name.isEmpty()) return;
+        CommunalTask t = facade.createTask(name, desc, points);
+        tasksObs.add(t);
 
-        // Create task via facade
-        CommunalTask newTask = facade.createTask(name, desc, points);
-
-        // Add to UI list
-        tasksObs.add(newTask);
+        facade.exportAllData("cloverville_export.json"); // AUTO-SAVE
 
         nameField.clear();
         descriptionField.clear();
@@ -55,22 +42,20 @@ public class TaskListController {
     @FXML
     private void handleDelete() {
         CommunalTask selected = taskListView.getSelectionModel().getSelectedItem();
-        if (selected != null) {
+        if (selected == null) return;
 
-            // Delete from facade
-            facade.deleteTask(selected);
+        facade.deleteTask(selected);
+        tasksObs.remove(selected);
 
-            // Remove from UI list
-            tasksObs.remove(selected);
-        }
+        facade.exportAllData("cloverville_export.json"); // AUTO-SAVE
     }
 
     @FXML
     private void handleEdit() {
         selectedTask = taskListView.getSelectionModel().getSelectedItem();
-        if (selectedTask != null) {
-            SceneManager.switchTo("task-edit.fxml");
-        }
+        if (selectedTask == null) return;
+
+        SceneManager.switchTo("task-edit.fxml");
     }
 
     @FXML

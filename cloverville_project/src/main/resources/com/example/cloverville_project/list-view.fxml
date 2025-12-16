@@ -28,6 +28,7 @@
             <Button text="Edit Selected" onAction="#handleEdit"/>
             <Button text="Complete Task" onAction="#handleGoToCompleteTask"/>
             <Button text="Manage Tasks" onAction="#handleGoToTaskPage"/>
+            <Button text="Back to main menu" onAction="#handleBackToMain"/>
 
 
 

@@ -5,26 +5,27 @@ import javafx.scene.control.Label;
 
 public class HelloController {
 
-    @FXML
-    private Label welcomeText;
+    @FXML private Label communityPoolLabel;
+
+    private final ClovervilleFacade facade = ClovervilleFacade.getInstance();
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to Cloverville!");
+    public void initialize() {
+        communityPoolLabel.setText("Community Pool: " + facade.getCommunityPool());
     }
 
     @FXML
-    public void openTradeOffers() {
-        SceneManager.switchTo("trade_offers.fxml");
-    }
-
-    @FXML
-    public void openResidents() {
+    private void openResidents() {
         SceneManager.switchTo("list-view.fxml");
     }
 
     @FXML
-    public void openGreenActions() {
+    private void openTradeOffers() {
+        SceneManager.switchTo("trade_offers.fxml");
+    }
+
+    @FXML
+    private void openGreenActions() {
         SceneManager.switchTo("green-action.fxml");
     }
 }

@@ -1,7 +1,6 @@
 package com.example.cloverville_project;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -14,21 +13,14 @@ public class GreenActionsController {
     @FXML private ComboBox<Resident> residentCombo;
     @FXML private ListView<String> actionList;
 
-    private ClovervilleFacade facade = ClovervilleFacade.getInstance();
+    public static javafx.collections.ObservableList<String> assignedActions =
+            FXCollections.observableArrayList();
 
-    private ObservableList<Resident> residentsObs = FXCollections.observableArrayList();
-
-    // A UI-friendly history list
-    public static ObservableList<String> assignedActions = FXCollections.observableArrayList();
+    private final ClovervilleFacade facade = ClovervilleFacade.getInstance();
 
     @FXML
     public void initialize() {
-
-        // Load residents from Facade instead of static global lists
-        residentsObs.setAll(facade.getAllResidents());
-        residentCombo.setItems(residentsObs);
-
-        // Keep existing action history behavior
+        residentCombo.setItems(FXCollections.observableArrayList(facade.getAllResidents()));
         actionList.setItems(assignedActions);
     }
 
@@ -39,21 +31,23 @@ public class GreenActionsController {
         String pointsText = pointsField.getText();
         Resident resident = residentCombo.getValue();
 
-        if (name.isEmpty() || pointsText.isEmpty() || resident == null) {
-            System.out.println("Missing fields!");
-            return;
-        }
+        if (name.isEmpty() || pointsText.isEmpty() || resident == null) return;
 
         int points = Integer.parseInt(pointsText);
 
-        // --- Create and apply the green action using the facade ---
+        // 1️⃣ STORE the green action in the system
+        facade.createGreenAction(name, points);
+
+        // 2️⃣ APPLY it to the resident
         facade.performGreenAction(resident.getName(), name);
 
-        // --- Add to history list for UI ---
-        String record = resident.getName() + " received +" + points + " points for: " + name;
-        assignedActions.add(record);
+        // 3️⃣ UI log
+        assignedActions.add(resident.getName() + " received +" + points + " points for " + name);
 
-        // Clear UI
+        // 4️⃣ EXPORT (auto-save)
+        facade.exportAllData("cloverville_export.json");
+
+        // Clear input
         nameField.clear();
         pointsField.clear();
         residentCombo.getSelectionModel().clearSelection();
@@ -61,6 +55,6 @@ public class GreenActionsController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchTo("main-menu.fxml");
+        SceneManager.switchTo("hello-view.fxml");
     }
 }

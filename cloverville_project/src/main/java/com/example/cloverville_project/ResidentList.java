@@ -23,8 +23,12 @@ public class ResidentList {
   {
       return residents;
   }
+    public void clear() {
+        residents.clear();   // or offers.clear(), tasks.clear(), actions.clear()
+    }
 
-  public Resident findByName(String name)
+
+    public Resident findByName(String name)
   {
       for(Resident r : residents)
       {

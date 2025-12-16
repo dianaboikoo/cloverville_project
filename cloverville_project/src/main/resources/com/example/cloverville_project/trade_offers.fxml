@@ -19,20 +19,19 @@
                 <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="149.33334350585938" text="Price/Service" />
             </columns>
         </TableView>
-        <TextField fx:id="statusField" layoutX="23.0" layoutY="275.0" prefHeight="25.0" prefWidth="95.0" />
-        <TextField fx:id="offerField" layoutX="288.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
-        <TextField fx:id="priceField" layoutX="395.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
-        <Label layoutX="23.0" layoutY="246.0" text="Status" />
-        <Label layoutX="131.0" layoutY="246.0" text="Owner" />
-        <Label layoutX="288.0" layoutY="247.0" text="Trade Offer" />
-        <Label layoutX="395.0" layoutY="247.0" text="Price/Service" />
-        <Button layoutX="23.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleAddOffer" text="Add Offer" />
-        <Button layoutX="23.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleDeleteOffer" text="Delete Selected" />
-        <Button layoutX="23.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleEditOffer" text="Edit Selected" />
-        <ComboBox fx:id="residentComboBox" layoutX="288.0" layoutY="327.0" prefWidth="150.0" promptText="Select Resident" />
-        <Button layoutX="460.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleAssignOffer" text="Assign to Resident" />
-        <ComboBox fx:id="ownerComboBox" layoutX="131.0" layoutY="276.0" prefWidth="150.0" />
-        <TextField fx:id="pointCostField" layoutX="289.0" layoutY="387.0" />
-        <Text layoutX="289.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point cost (optional)" />
+        <TextField fx:id="offerField" layoutX="199.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
+        <TextField fx:id="priceField" layoutX="306.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
+        <Label layoutX="23.0" layoutY="247.0" prefWidth="35.0" text="Owner" />
+        <Label layoutX="199.0" layoutY="249.0" text="Trade Offer" />
+        <Label layoutX="306.0" layoutY="249.0" text="Price/Service" />
+        <Button layoutX="416.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleAddOffer" text="Add Offer" />
+        <Button layoutX="416.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleDeleteOffer" text="Delete Selected" />
+        <Button layoutX="416.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleEditOffer" text="Edit Selected" />
+        <ComboBox fx:id="residentComboBox" layoutX="23.0" layoutY="388.0" prefWidth="150.0" promptText="Select Resident" />
+        <Button layoutX="344.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleAssignOffer" text="Assign to Resident" />
+        <ComboBox fx:id="ownerComboBox" layoutX="23.0" layoutY="276.0" prefWidth="150.0" />
+        <Text layoutX="23.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign the task" />
+        <ComboBox fx:id="taskComboBox" layoutX="185.0" layoutY="388.0" prefWidth="150.0" promptText="Select a task" />
+        <Button layoutX="416.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleBackToMain" text="Back" />
     </children>
 </AnchorPane>

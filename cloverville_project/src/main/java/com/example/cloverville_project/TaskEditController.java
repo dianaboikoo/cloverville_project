@@ -10,35 +10,28 @@ public class TaskEditController {
     @FXML private TextArea descriptionField;
     @FXML private TextField personalPointsField;
 
-    private ClovervilleFacade facade = ClovervilleFacade.getInstance();
+    private final ClovervilleFacade facade = ClovervilleFacade.getInstance();
 
     @FXML
     public void initialize() {
+        CommunalTask t = TaskListController.selectedTask;
 
-        CommunalTask task = TaskListController.selectedTask;
-        if (task == null) return;
-
-        nameField.setText(task.getName());
-        descriptionField.setText(task.getDescription());
-        personalPointsField.setText(String.valueOf(task.getPersonalPoints()));
+        nameField.setText(t.getName());
+        descriptionField.setText(t.getDescription());
+        personalPointsField.setText(String.valueOf(t.getPersonalPoints()));
     }
 
     @FXML
     private void handleSave() {
+        CommunalTask t = TaskListController.selectedTask;
 
-        CommunalTask task = TaskListController.selectedTask;
-        if (task == null) return;
+        facade.editTask(t,
+                nameField.getText(),
+                descriptionField.getText(),
+                Integer.parseInt(personalPointsField.getText()));
 
-        String newName = nameField.getText();
-        String newDesc = descriptionField.getText();
-        int newPoints = personalPointsField.getText().isEmpty()
-                ? 0
-                : Integer.parseInt(personalPointsField.getText());
+        facade.exportAllData("cloverville_export.json"); // AUTO-SAVE
 
-        // Update task via facade
-        facade.editTask(task, newName, newDesc, newPoints);
-
-        // Return to the task list page
         SceneManager.switchTo("task-list.fxml");
     }
 

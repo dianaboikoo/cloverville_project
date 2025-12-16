@@ -2,13 +2,13 @@ package com.example.cloverville_project;
 
 public class TradeOffer {
 
-    private String owner;           // Name of the resident who created the offer
-    private String tradeOffer;      // Description of offer
-    private String priceOrService;  // What the owner wants in return
-    private String status;          // e.g. "Unassigned", "Assigned"
-    private Integer pointCost;      // Optional transferable points
+    private String owner;            // Owner name (string reference)
+    private String tradeOffer;       // Description/title of the offer
+    private String priceOrService;   // Either a service description OR number string
+    private String status;           // "Unassigned", "Assigned", etc.
+    private Integer pointCost;       // Parsed cost if numeric, otherwise null
 
-    // Needed by Gson
+    // Needed for JSON export
     public TradeOffer() {}
 
     public TradeOffer(String owner, String tradeOffer, String priceOrService,
@@ -20,10 +20,9 @@ public class TradeOffer {
         this.pointCost = pointCost;
     }
 
-    // ===========================
-    // GETTERS
-    // ===========================
-
+    // ---------------------------
+    // Getters
+    // ---------------------------
     public String getOwner() {
         return owner;
     }
@@ -44,10 +43,9 @@ public class TradeOffer {
         return pointCost;
     }
 
-    // ===========================
-    // SETTERS
-    // ===========================
-
+    // ---------------------------
+    // Setters
+    // ---------------------------
     public void setOwner(String owner) {
         this.owner = owner;
     }
@@ -68,9 +66,11 @@ public class TradeOffer {
         this.pointCost = pointCost;
     }
 
+    // ---------------------------
+    // Useful for ComboBox and debugging
+    // ---------------------------
     @Override
     public String toString() {
-        // This is shown in ComboBoxes / Tables
-        return tradeOffer + " (" + owner + ")";
+        return tradeOffer + " (Owner: " + owner + ")";
     }
 }

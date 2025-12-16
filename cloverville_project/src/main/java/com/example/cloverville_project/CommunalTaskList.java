@@ -20,6 +20,10 @@ public class CommunalTaskList {
     public List<CommunalTask> getAllTasks() {
         return tasks;
     }
+    public void clear() {
+        tasks.clear();   // or offers.clear(), tasks.clear(), actions.clear()
+    }
+
 
     public CommunalTask findByName(String name) {
         for (CommunalTask task : tasks) {
