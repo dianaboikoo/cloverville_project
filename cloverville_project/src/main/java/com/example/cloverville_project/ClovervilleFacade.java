@@ -246,7 +246,11 @@ public class ClovervilleFacade {
 
     public void importAllData(String filename) {
         try {
-            Path importPath = Paths.get(System.getProperty("user.dir"), filename);
+            Path importPath = Paths.get(
+                    "C:/Users/marcu/Documents/GitHub/cloverville_website",
+                    filename
+            );
+
 
             if (!Files.exists(importPath)) {
                 System.out.println("No JSON file → starting fresh.");
@@ -342,7 +346,7 @@ public class ClovervilleFacade {
         }
     }
 
-   
+
 
     public void resetAllPersonalPoints() {
         for (Resident r : residentList.getAllResidents()) {
