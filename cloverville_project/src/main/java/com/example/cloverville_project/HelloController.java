@@ -28,4 +28,15 @@ public class HelloController {
     private void openGreenActions() {
         SceneManager.switchTo("green-action.fxml");
     }
+    @FXML
+    private void handleResetPersonalPoints() {
+        facade.resetAllPersonalPoints();
+
+        // AUTO-SAVE to website JSON
+        facade.exportAllData("cloverville_export.json");
+
+        // Update UI (community pool might have changed)
+
+    }
+
 }

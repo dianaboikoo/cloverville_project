@@ -149,6 +149,7 @@ public class ClovervilleFacade {
 
             assigned.setPersonalPoints(assigned.getPersonalPoints() - cost);
             owner.setPersonalPoints(owner.getPersonalPoints() + cost);
+
         }
 
         offer.setStatus("Assigned");
@@ -205,6 +206,7 @@ public class ClovervilleFacade {
         int totalEarned = base + bonus;
 
         r.setPersonalPoints(r.getPersonalPoints() + totalEarned);
+
         addToCommunityPool(totalEarned);
 
         TaskLogEntry entry = new TaskLogEntry(r, t);
@@ -340,10 +342,18 @@ public class ClovervilleFacade {
         }
     }
 
+   
 
-    // ============================================================
-    // EXPORT ALL DATA (SINGLE JSON FILE)
-    // ============================================================
+    public void resetAllPersonalPoints() {
+        for (Resident r : residentList.getAllResidents()) {
+            int points = r.getPersonalPoints();
+            if (points > 0) {
+                addToCommunityPool(points);
+                r.setPersonalPoints(0);
+            }
+        }
+    }
+
 
     // ============================================================
 // EXPORT ALL DATA (SINGLE JSON FILE)
@@ -351,7 +361,7 @@ public class ClovervilleFacade {
 
     public void exportAllData(String filename) {
 
-        // 🔥 ALWAYS export directly into your website folder
+
         Path exportPath = Paths.get(
                 "C:/Users/marcu/Documents/GitHub/cloverville_website",
                 filename
@@ -367,7 +377,7 @@ public class ClovervilleFacade {
         List<Map<String, Object>> residentsJson = new ArrayList<>();
         for (Resident r : residentList.getAllResidents()) {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", r.getName());
+            map.put("name", "Resident " + (residentsJson.size()+ 1));
             map.put("personalPoints", r.getPersonalPoints());
             map.put("greenPoints", r.getGreenPoints());
             map.put("participationBoostPercent", r.getParticipationBoostPercent());
@@ -377,16 +387,32 @@ public class ClovervilleFacade {
 
         // Trade Offers
         List<Map<String, Object>> offersJson = new ArrayList<>();
+
         for (TradeOffer o : tradeOfferList.getAllOffers()) {
             Map<String, Object> map = new HashMap<>();
-            map.put("owner", o.getOwner());
+
+            // 🔒 Anonymize owner for website export
+            Resident owner = residentList.findByName(o.getOwner());
+            String publicOwner;
+
+            if (owner != null) {
+                int index = residentList.getAllResidents().indexOf(owner) + 1;
+                publicOwner = "Resident " + index;
+            } else {
+                publicOwner = "Unknown Resident";
+            }
+
+            map.put("owner", publicOwner);
             map.put("tradeOffer", o.getTradeOffer());
             map.put("priceOrService", o.getPriceOrService());
             map.put("status", o.getStatus());
             map.put("pointCost", o.getPointCost());
+
             offersJson.add(map);
         }
+
         root.put("tradeOffers", offersJson);
+
 
         // Tasks
         List<Map<String, Object>> tasksJson = new ArrayList<>();

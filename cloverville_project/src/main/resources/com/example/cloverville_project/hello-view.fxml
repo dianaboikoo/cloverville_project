@@ -19,6 +19,11 @@
                style="-fx-font-size: 20px; -fx-font-weight: bold;"
                text="Community Pool: 0" />
 
+        <Button
+                text="Reset Personal Points"
+                onAction="#handleResetPersonalPoints"
+                prefWidth="200"/>
+
         <!-- Buttons -->
 
 
