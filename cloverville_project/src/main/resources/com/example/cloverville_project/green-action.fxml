@@ -4,34 +4,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.cloverville_project.GreenActionsController"
       alignment="CENTER"
-      spacing="15">
+      spacing="20"
+      stylesheets="@main.css">
 
     <padding>
         <Insets top="25" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Green Actions"
-           style="-fx-font-size: 22; -fx-font-weight: bold;" />
 
-    <Label text="Action Name:"/>
-    <TextField fx:id="nameField"/>
+    <Label text="🌿 Green Actions"
+           styleClass="label-title"/>
 
-    <Label text="Green Points:"/>
-    <TextField fx:id="pointsField"/>
 
-    <Label text="Assign to Resident:"/>
-    <ComboBox fx:id="residentCombo"/>
+    <VBox spacing="10"
+          prefWidth="350"
+          styleClass="card">
 
-    <Button text="Add Green Action" onAction="#handleAdd"/>
+        <Label text="Action Name:"/>
+        <TextField fx:id="nameField"/>
 
-    <Separator/>
+        <Label text="Green Points:"/>
+        <TextField fx:id="pointsField"/>
 
-    <Label text="Actions Assigned:"/>
-    <ListView fx:id="actionList" prefHeight="200"/>
+        <Label text="Assign to Resident:"/>
+        <ComboBox fx:id="residentCombo"/>
 
-    <Button text="Back to Menu" onAction="#handleBack"/>
+        <Button text="Add Green Action"
+                styleClass="button-primary"
+                onAction="#handleAdd"/>
+    </VBox>
+
+
+    <VBox spacing="10"
+          prefWidth="350"
+          styleClass="card">
+
+        <Label text="Actions Assigned:"/>
+        <ListView fx:id="actionList" prefHeight="200"/>
+
+        <Button text="← Back to Menu"
+                styleClass="button-secondary"
+                onAction="#handleBack"/>
+    </VBox>
 
 </VBox>

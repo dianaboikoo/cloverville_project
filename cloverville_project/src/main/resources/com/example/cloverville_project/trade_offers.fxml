@@ -9,29 +9,99 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cloverville_project.TradeOffersController">
+<?import javafx.scene.layout.VBox?>
+<AnchorPane prefHeight="448.0"
+            prefWidth="600.0"
+            stylesheets="@main.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.cloverville_project.TradeOffersController">
+
     <children>
-        <TableView fx:id="tradeTable" layoutX="23.0" layoutY="29.0" prefHeight="200.0" prefWidth="555.0">
+
+
+        <Button text="← Back"
+                layoutX="20"
+                layoutY="15"
+                styleClass="button-secondary"
+                onAction="#handleBackToMain"/>
+
+        <!-- 📊 TRADE TABLE -->
+        <TableView fx:id="tradeTable"
+                   layoutX="23"
+                   layoutY="60"
+                   prefHeight="200"
+                   prefWidth="555"
+                   styleClass="card">
             <columns>
-                <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="149.33334350585938" text="Status" />
-                <TableColumn fx:id="ownerColumn" prefWidth="126.0" text="Owner" />
-                <TableColumn fx:id="offerColumn" minWidth="0.0" prefWidth="127.99996948242188" text="Trade Offer" />
-                <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="149.33334350585938" text="Price/Service" />
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="140"/>
+                <TableColumn fx:id="ownerColumn" text="Owner" prefWidth="120"/>
+                <TableColumn fx:id="offerColumn" text="Trade Offer" prefWidth="140"/>
+                <TableColumn fx:id="priceColumn" text="Price / Service" prefWidth="140"/>
             </columns>
         </TableView>
-        <TextField fx:id="offerField" layoutX="199.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
-        <TextField fx:id="priceField" layoutX="306.0" layoutY="276.0" prefHeight="25.0" prefWidth="95.0" />
-        <Label layoutX="23.0" layoutY="247.0" prefWidth="35.0" text="Owner" />
-        <Label layoutX="199.0" layoutY="249.0" text="Trade Offer" />
-        <Label layoutX="306.0" layoutY="249.0" text="Price/Service" />
-        <Button layoutX="416.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleAddOffer" text="Add Offer" />
-        <Button layoutX="416.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleDeleteOffer" text="Delete Selected" />
-        <Button layoutX="416.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleEditOffer" text="Edit Selected" />
-        <ComboBox fx:id="residentComboBox" layoutX="23.0" layoutY="388.0" prefWidth="150.0" promptText="Select Resident" />
-        <Button layoutX="344.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleAssignOffer" text="Assign to Resident" />
-        <ComboBox fx:id="ownerComboBox" layoutX="23.0" layoutY="276.0" prefWidth="150.0" />
-        <Text layoutX="23.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign the task" />
-        <ComboBox fx:id="taskComboBox" layoutX="185.0" layoutY="388.0" prefWidth="150.0" promptText="Select a task" />
-        <Button layoutX="416.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleBackToMain" text="Back" />
+
+
+        <Label layoutX="23" layoutY="270" text="Owner"/>
+        <Label layoutX="199" layoutY="270" text="Trade Offer"/>
+        <Label layoutX="306" layoutY="270" text="Price / Service"/>
+
+
+        <ComboBox fx:id="ownerComboBox"
+                  layoutX="23"
+                  layoutY="295"
+                  prefWidth="150"/>
+
+        <TextField fx:id="offerField"
+                   layoutX="199"
+                   layoutY="295"
+                   prefWidth="95"/>
+
+        <TextField fx:id="priceField"
+                   layoutX="306"
+                   layoutY="295"
+                   prefWidth="95"/>
+
+
+        <VBox layoutX="430"
+              layoutY="285"
+              spacing="4">
+
+            <Button text="Add Offer"
+                    styleClass="button-primary"
+                    onAction="#handleAddOffer"/>
+
+            <Button text="Edit Selected"
+                    styleClass="button-small"
+                    onAction="#handleEditOffer"/>
+
+            <Button text="Delete Selected"
+                    styleClass="button-small"
+                    onAction="#handleDeleteOffer"/>
+        </VBox>
+
+
+        <Text layoutX="23"
+              layoutY="365"
+              text="Assign the trade offer"/>
+
+        <ComboBox fx:id="residentComboBox"
+                  layoutX="23"
+                  layoutY="385"
+                  prefWidth="150"
+                  promptText="Select Resident"/>
+
+        <ComboBox fx:id="taskComboBox"
+                  layoutX="185"
+                  layoutY="385"
+                  prefWidth="150"
+                  promptText="Select a trade offer"/>
+
+        <Button text="Assign to Resident"
+                layoutX="370"
+                layoutY="385"
+                styleClass="button-primary"
+                onAction="#handleAssignOffer"/>
+
     </children>
 </AnchorPane>

@@ -27,7 +27,7 @@ public class CompleteTaskController {
 
         if (r == null || t == null) return;
 
-        // COMPLETE TASK → adds points + boost + updates community pool
+        // COMPLETE TASK
         facade.completeTask(r.getName(), t.getName());
 
         logList.refresh();
@@ -38,6 +38,6 @@ public class CompleteTaskController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchTo("list-view.fxml");
+        SceneManager.switchTo("hello-view.fxml");
     }
 }

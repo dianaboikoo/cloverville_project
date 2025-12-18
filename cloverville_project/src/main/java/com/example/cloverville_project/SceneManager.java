@@ -19,7 +19,7 @@ public class SceneManager {
 
             // Check if resource exists
             if (SceneManager.class.getResource(path) == null) {
-                System.err.println("❌ FXML NOT FOUND: " + path);
+                System.err.println("FXML NOT FOUND: " + path);
                 return;
             }
 
@@ -29,7 +29,7 @@ public class SceneManager {
             mainStage.setScene(new Scene(root));
 
         } catch (Exception e) {
-            System.err.println("❌ Error loading FXML: " + fxml);
+            System.err.println("Error loading FXML: " + fxml);
             e.printStackTrace();
         }
     }

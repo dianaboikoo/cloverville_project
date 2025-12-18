@@ -27,13 +27,12 @@
     <Button text="Save" onAction="#handleSave"/>
     <Button text="Back" onAction="#handleBack"/>
 
-    <!-- NEW PARTICIPATION SECTION -->
+
     <Label text="Participation:" style="-fx-font-size: 16;"/>
 
-    <!-- Shows number of completed tasks -->
     <Label fx:id="participationCountLabel" text="Completed Tasks: 0"/>
 
-    <!-- Shows resident’s current boost -->
+
     <Label fx:id="currentBoostLabel" text="Boost: 0%"/>
 
     <HBox spacing="10">

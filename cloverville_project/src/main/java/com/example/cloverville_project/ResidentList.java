@@ -24,7 +24,7 @@ public class ResidentList {
       return residents;
   }
     public void clear() {
-        residents.clear();   // or offers.clear(), tasks.clear(), actions.clear()
+        residents.clear();
     }
 
 

@@ -31,7 +31,7 @@ public class TradeOfferList {
         return result;
     }
     public void clear() {
-        offers.clear();   // or offers.clear(), tasks.clear(), actions.clear()
+        offers.clear();
     }
 
 

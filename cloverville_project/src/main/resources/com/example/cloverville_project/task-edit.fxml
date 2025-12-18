@@ -4,28 +4,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.cloverville_project.TaskEditController"
-      spacing="10">
+      spacing="20"
+      alignment="CENTER"
+      stylesheets="@main.css">
 
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets top="25" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Edit Communal Task"/>
 
-    <Label text="Name:"/>
-    <TextField fx:id="nameField"/>
+    <Label text="Edit Communal Task"
+           styleClass="label-title"/>
 
-    <Label text="Description:"/>
-    <TextArea fx:id="descriptionField" prefRowCount="3"/>
 
-    <Label text="Personal Points:"/>
-    <TextField fx:id="personalPointsField"/>
+    <VBox spacing="10"
+          prefWidth="350"
+          styleClass="card">
 
-    <HBox spacing="10">
-        <Button text="Save" onAction="#handleSave"/>
-        <Button text="Back" onAction="#handleBack"/>
-    </HBox>
+        <Label text="Name:"/>
+        <TextField fx:id="nameField"/>
+
+        <Label text="Description:"/>
+        <TextArea fx:id="descriptionField" prefRowCount="3"/>
+
+        <Label text="Personal Points:"/>
+        <TextField fx:id="personalPointsField"/>
+
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Save"
+                    styleClass="button-primary"
+                    onAction="#handleSave"/>
+
+            <Button text="← Back"
+                    styleClass="button-secondary"
+                    onAction="#handleBack"/>
+        </HBox>
+
+    </VBox>
 
 </VBox>

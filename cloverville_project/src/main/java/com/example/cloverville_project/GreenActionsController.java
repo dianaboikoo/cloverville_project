@@ -35,16 +35,16 @@ public class GreenActionsController {
 
         int points = Integer.parseInt(pointsText);
 
-        // 1️⃣ STORE the green action in the system
+        //  STORE the green action in the system
         facade.createGreenAction(name, points);
 
-        // 2️⃣ APPLY it to the resident
+        // APPLY it to the resident
         facade.performGreenAction(resident.getName(), name);
 
-        // 3️⃣ UI log
+        // UI log
         assignedActions.add(resident.getName() + " received +" + points + " points for " + name);
 
-        // 4️⃣ EXPORT (auto-save)
+        // EXPORT (auto-save)
         facade.exportAllData("cloverville_export.json");
 
         // Clear input

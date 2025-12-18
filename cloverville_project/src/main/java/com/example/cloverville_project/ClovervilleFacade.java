@@ -12,9 +12,7 @@ import java.util.*;
 
 public class ClovervilleFacade {
 
-    // -------------------------
-    // SINGLETON
-    // -------------------------
+
     private static ClovervilleFacade instance;
 
     public static ClovervilleFacade getInstance() {
@@ -22,7 +20,7 @@ public class ClovervilleFacade {
         return instance;
     }
 
-    // Private constructor
+
     private ClovervilleFacade() {
         this.residentList = new ResidentList();
         this.tradeOfferList = new TradeOfferList();
@@ -30,17 +28,17 @@ public class ClovervilleFacade {
         this.greenActionList = new GreenActionList();
     }
 
-    // -------------------------
+
     // INTERNAL DATA LISTS
-    // -------------------------
+
     private ResidentList residentList;
     private TradeOfferList tradeOfferList;
     private CommunalTaskList taskList;
     private GreenActionList greenActionList;
 
-    // -------------------------
+
     // COMMUNITY POOL
-    // -------------------------
+
     private int communityPool = 0;
 
     public int getCommunityPool() {
@@ -53,10 +51,25 @@ public class ClovervilleFacade {
         }
     }
 
+// FILE PATH RESOLUTION
+
 
     // ============================================================
+// FILE PATH RESOLUTION (PROJECT ↔ WEBSITE)
+// ============================================================
+
+    private Path getDataFile(String filename) throws IOException {
+        Path projectDir = Paths.get(System.getProperty("user.dir"));
+        Path websiteDir = projectDir.getParent().resolve("cloverville_website");
+        Files.createDirectories(websiteDir);
+        return websiteDir.resolve(filename);
+    }
+
+
+
+
     // RESIDENTS
-    // ============================================================
+
 
     public Resident createResident(String name, int personalPoints, int greenPoints) {
         Resident r = new Resident(name, personalPoints, greenPoints);
@@ -99,9 +112,9 @@ public class ClovervilleFacade {
     }
 
 
-    // ============================================================
+
     // TRADE OFFERS
-    // ============================================================
+
 
     public List<TradeOffer> getAllTradeOffers() {
         return tradeOfferList.getAllOffers();
@@ -216,9 +229,9 @@ public class ClovervilleFacade {
     }
 
 
-    // ============================================================
+
     // GREEN ACTIONS
-    // ============================================================
+
 
     public GreenAction createGreenAction(String name, int points) {
         GreenAction a = new GreenAction(name, points);
@@ -240,17 +253,13 @@ public class ClovervilleFacade {
     }
 
 
-    // ============================================================
-    // IMPORT ALL DATA (AUTO LOAD)
-    // ============================================================
+
+    // IMPORT ALL DATA
+
 
     public void importAllData(String filename) {
         try {
-            Path importPath = Paths.get(
-                    "C:/Users/marcu/Documents/GitHub/cloverville_website",
-                    filename
-            );
-
+            Path importPath = getDataFile(filename);
 
             if (!Files.exists(importPath)) {
                 System.out.println("No JSON file → starting fresh.");
@@ -266,7 +275,9 @@ public class ClovervilleFacade {
 
             // Residents
             residentList.clear();
-            List<Map<String, Object>> residentsJson = (List<Map<String, Object>>) root.get("residents");
+            List<Map<String, Object>> residentsJson =
+                    (List<Map<String, Object>>) root.get("residents");
+
             if (residentsJson != null) {
                 for (Map<String, Object> map : residentsJson) {
                     Resident r = new Resident(
@@ -283,7 +294,9 @@ public class ClovervilleFacade {
 
             // Trade Offers
             tradeOfferList.clear();
-            List<Map<String, Object>> offersJson = (List<Map<String, Object>>) root.get("tradeOffers");
+            List<Map<String, Object>> offersJson =
+                    (List<Map<String, Object>>) root.get("tradeOffers");
+
             if (offersJson != null) {
                 for (Map<String, Object> map : offersJson) {
                     TradeOffer o = new TradeOffer(
@@ -291,11 +304,11 @@ public class ClovervilleFacade {
                             (String) map.get("tradeOffer"),
                             (String) map.get("priceOrService"),
                             (String) map.get("status"),
-                            map.get("pointCost") == null ? null : ((Double) map.get("pointCost")).intValue()
+                            map.get("pointCost") == null ? null :
+                                    ((Double) map.get("pointCost")).intValue()
                     );
                     tradeOfferList.addOffer(o);
 
-                    // Attach to owner
                     Resident owner = residentList.findByName(o.getOwner());
                     if (owner != null) owner.getOwnedTradeOffers().add(o);
                 }
@@ -303,7 +316,9 @@ public class ClovervilleFacade {
 
             // Tasks
             taskList.clear();
-            List<Map<String, Object>> tasksJson = (List<Map<String, Object>>) root.get("tasks");
+            List<Map<String, Object>> tasksJson =
+                    (List<Map<String, Object>>) root.get("tasks");
+
             if (tasksJson != null) {
                 for (Map<String, Object> map : tasksJson) {
                     CommunalTask t = new CommunalTask(
@@ -317,7 +332,9 @@ public class ClovervilleFacade {
 
             // Green Actions
             greenActionList.clear();
-            List<Map<String, Object>> greenJson = (List<Map<String, Object>>) root.get("greenActions");
+            List<Map<String, Object>> greenJson =
+                    (List<Map<String, Object>>) root.get("greenActions");
+
             if (greenJson != null) {
                 for (Map<String, Object> map : greenJson) {
                     GreenAction g = new GreenAction(
@@ -330,12 +347,16 @@ public class ClovervilleFacade {
 
             // Task Logs
             TaskLog.log.clear();
-            List<Map<String, Object>> logJson = (List<Map<String, Object>>) root.get("taskLog");
+            List<Map<String, Object>> logJson =
+                    (List<Map<String, Object>>) root.get("taskLog");
+
             if (logJson != null) {
                 for (Map<String, Object> map : logJson) {
                     Resident r = residentList.findByName((String) map.get("residentName"));
                     CommunalTask t = taskList.findByName((String) map.get("taskName"));
-                    if (r != null && t != null) TaskLog.log.add(new TaskLogEntry(r, t));
+                    if (r != null && t != null) {
+                        TaskLog.log.add(new TaskLogEntry(r, t));
+                    }
                 }
             }
 
@@ -345,6 +366,7 @@ public class ClovervilleFacade {
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -359,17 +381,19 @@ public class ClovervilleFacade {
     }
 
 
-    // ============================================================
-// EXPORT ALL DATA (SINGLE JSON FILE)
-// ============================================================
+
+// EXPORT ALL DATA
+
 
     public void exportAllData(String filename) {
 
-
-        Path exportPath = Paths.get(
-                "C:/Users/marcu/Documents/GitHub/cloverville_website",
-                filename
-        );
+        Path exportPath;
+        try {
+            exportPath = getDataFile(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Map<String, Object> root = new HashMap<>();
@@ -381,7 +405,7 @@ public class ClovervilleFacade {
         List<Map<String, Object>> residentsJson = new ArrayList<>();
         for (Resident r : residentList.getAllResidents()) {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", "Resident " + (residentsJson.size()+ 1));
+            map.put("name", "Resident " + (residentsJson.size() + 1));
             map.put("personalPoints", r.getPersonalPoints());
             map.put("greenPoints", r.getGreenPoints());
             map.put("participationBoostPercent", r.getParticipationBoostPercent());
@@ -391,20 +415,13 @@ public class ClovervilleFacade {
 
         // Trade Offers
         List<Map<String, Object>> offersJson = new ArrayList<>();
-
         for (TradeOffer o : tradeOfferList.getAllOffers()) {
             Map<String, Object> map = new HashMap<>();
 
-            // 🔒 Anonymize owner for website export
             Resident owner = residentList.findByName(o.getOwner());
-            String publicOwner;
-
-            if (owner != null) {
-                int index = residentList.getAllResidents().indexOf(owner) + 1;
-                publicOwner = "Resident " + index;
-            } else {
-                publicOwner = "Unknown Resident";
-            }
+            String publicOwner = owner != null
+                    ? "Resident " + (residentList.getAllResidents().indexOf(owner) + 1)
+                    : "Unknown Resident";
 
             map.put("owner", publicOwner);
             map.put("tradeOffer", o.getTradeOffer());
@@ -414,9 +431,7 @@ public class ClovervilleFacade {
 
             offersJson.add(map);
         }
-
         root.put("tradeOffers", offersJson);
-
 
         // Tasks
         List<Map<String, Object>> tasksJson = new ArrayList<>();
@@ -456,5 +471,6 @@ public class ClovervilleFacade {
             e.printStackTrace();
         }
     }
+
 
 }

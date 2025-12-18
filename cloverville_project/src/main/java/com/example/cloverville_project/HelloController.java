@@ -1,7 +1,12 @@
 package com.example.cloverville_project;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -38,5 +43,17 @@ public class HelloController {
         // Update UI (community pool might have changed)
 
     }
+    @FXML
+    private void handleGoToCompleteTask(){
+        SceneManager.switchTo("complete-task.fxml");
+
+    }
+    @FXML
+    private void handleGoToTaskPage(){
+        SceneManager.switchTo("task-list.fxml");
+
+    }
+
+
 
 }

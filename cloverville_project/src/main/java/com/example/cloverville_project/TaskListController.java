@@ -60,6 +60,6 @@ public class TaskListController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchTo("list-view.fxml");
+        SceneManager.switchTo("hello-view.fxml");
     }
 }

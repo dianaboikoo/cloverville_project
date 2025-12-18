@@ -1,0 +1,15 @@
+{
+  "taskLog": [],
+  "tradeOffers": [],
+  "residents": [
+    {
+      "participationBoostPercent": 0,
+      "personalPoints": 0,
+      "name": "Resident 1",
+      "greenPoints": 0
+    }
+  ],
+  "communityPool": 0,
+  "tasks": [],
+  "greenActions": []
+}

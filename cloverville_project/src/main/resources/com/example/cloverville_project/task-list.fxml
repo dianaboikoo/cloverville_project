@@ -4,19 +4,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.cloverville_project.TaskListController">
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.cloverville_project.TaskListController"
+            stylesheets="@main.css">
+
 
     <left>
-        <ListView fx:id="taskListView" prefWidth="220"/>
+        <ListView fx:id="taskListView"
+                  prefWidth="220"
+                  styleClass="card"/>
     </left>
 
+
     <right>
-        <VBox spacing="10">
+        <VBox spacing="20"
+              styleClass="card">
+
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
+            <!-- 🧾 FIELDS -->
             <Label text="Task Name:"/>
             <TextField fx:id="nameField"/>
 
@@ -26,13 +35,27 @@
             <Label text="Personal Points:"/>
             <TextField fx:id="personalPointsField"/>
 
+
             <HBox spacing="10">
-                <Button text="Add" onAction="#handleAdd"/>
-                <Button text="Delete" onAction="#handleDelete"/>
+                <Button text="Add"
+                        styleClass="button-primary"
+                        onAction="#handleAdd"/>
+
+                <Button text="Delete"
+                        styleClass="button-small"
+                        onAction="#handleDelete"/>
             </HBox>
 
-            <Button text="Edit Selected" onAction="#handleEdit"/>
-            <Button text="Back" onAction="#handleBack"/>
+            <Button text="Edit Selected"
+                    styleClass="button-small"
+                    onAction="#handleEdit"/>
+
+            <Separator/>
+
+            <Button text="← Back"
+                    styleClass="button-secondary"
+                    onAction="#handleBack"/>
+
         </VBox>
     </right>
 

@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/25"
+<AnchorPane xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.cloverville_project.HelloController">
+            fx:controller="com.example.cloverville_project.HelloController"
+            stylesheets="@main.css"
+            prefWidth="600"
+            prefHeight="400">
 
     <children>
 
-        <!-- 💚 COMMUNITY POOL DISPLAY -->
-        <Label fx:id="communityPoolLabel"
-               layoutX="30.0" layoutY="30.0"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;"
-               text="Community Pool: 0" />
+        <VBox spacing="25"
+              layoutX="30"
+              layoutY="30"
+              prefWidth="540">
 
-        <Button
-                text="Reset Personal Points"
-                onAction="#handleResetPersonalPoints"
-                prefWidth="200"/>
+            <!-- 🌍 COMMUNITY POOL -->
+            <VBox styleClass="card" spacing="10">
+                <Label fx:id="communityPoolLabel"
+                       text="🌱 Community Pool: 0"
+                       styleClass="label-title"/>
 
-        <!-- Buttons -->
+                <Button text="Reset Personal Points"
+                        styleClass="button-secondary"
+                        onAction="#handleResetPersonalPoints"/>
+            </VBox>
 
 
+            <VBox spacing="15" alignment="CENTER">
 
-        <Button layoutX="43.0" layoutY="281.0"
-                mnemonicParsing="false"
-                onAction="#openTradeOffers"
-                prefHeight="55.0" prefWidth="101.0"
-                text="Trade Offers" />
+                <!-- ROW 1 -->
+                <HBox spacing="20" alignment="CENTER">
+                    <Button text="Trade Offers"
+                            styleClass="button-primary"
+                            onAction="#openTradeOffers"/>
 
-        <Button layoutX="207.0" layoutY="281.0"
-                mnemonicParsing="false"
-                onAction="#openResidents"
-                prefHeight="55.0" prefWidth="109.0"
-                text="Residents page" />
+                    <Button text="Residents"
+                            styleClass="button-primary"
+                            onAction="#openResidents"/>
 
-        <Button layoutX="358.0" layoutY="281.0"
-                mnemonicParsing="false"
-                onAction="#openGreenActions"
-                prefHeight="55.0" prefWidth="146.0"
-                text="Green Actions Page" />
+                    <Button text="Green Actions"
+                            styleClass="button-primary"
+                            onAction="#openGreenActions"/>
+                </HBox>
+
+                <!-- ROW 2 -->
+                <HBox spacing="20" alignment="CENTER">
+                    <Button text="Assign Communal Task"
+                            styleClass="button-primary"
+                            onAction="#handleGoToCompleteTask"/>
+
+                    <Button text="Manage Tasks"
+                            styleClass="button-primary"
+                            onAction="#handleGoToTaskPage"/>
+                </HBox>
+
+            </VBox>
+
+        </VBox>
 
     </children>
 </AnchorPane>
