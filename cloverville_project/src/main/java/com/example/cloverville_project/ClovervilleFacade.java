@@ -59,11 +59,25 @@ public class ClovervilleFacade {
 // ============================================================
 
     private Path getDataFile(String filename) throws IOException {
-        Path projectDir = Paths.get(System.getProperty("user.dir"));
-        Path websiteDir = projectDir.getParent().resolve("cloverville_website");
-        Files.createDirectories(websiteDir);
-        return websiteDir.resolve(filename);
+
+        Path current = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
+
+        // Walk upwards until we find cloverville_website
+        while (current != null) {
+            Path candidate = current.resolve("cloverville_website");
+            if (Files.exists(candidate) && Files.isDirectory(candidate)) {
+                return candidate.resolve(filename);
+            }
+            current = current.getParent();
+        }
+
+        throw new IOException(
+                "cloverville_website folder not found in any parent directory"
+        );
     }
+
+
+
 
 
 
